@@ -65,3 +65,45 @@ let calculate = (
 
 calculate(2, 3, add);
 
+// to avoid type definitions getting too long create type aliases
+// type alias names are usually  Pascal cased
+type SubtractFn = (d: number, e: number) => number; // the type alias
+
+let subtract: SubtractFn = (a, b) => a - b; // the actual function definition
+
+calculate(10, 5, subtract);
+
+interface Credentials {
+  password: string | number;
+  email: string;
+}
+
+let creds: Credentials = {
+  password: "abc@123",
+  email: "a@a.a",
+  mode: "admin",
+};
+
+// a special case where you could use interface beyond objects is the following
+class AuthCredentials implements Credentials {
+  // this above signature makes sure that your class adds the properties defined in the Credentials type as below
+  email: string;
+  password: string | number;
+  userName: string;
+  mode: string; // see below why this is required
+}
+
+// for example if you have the case implementing login, you can then go about doing it two ways as shown below
+function login(credentials: Credentials) {
+  console.log("Logging in!");
+}
+
+login(creds);
+// or
+login(new AuthCredentials());
+
+// extending a interface
+// but note: if an interface is extended the previously written class implementation also has to be updated accordingly!
+interface Credentials {
+  mode: string;
+}

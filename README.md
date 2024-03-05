@@ -27,4 +27,14 @@ This repository contains code for the course by the same name by Maximilian Schw
 - such a type inference will make sure that the value assigned to this variable is not just of a particular type, but precisely the set value, at all times
 - a function without a return value will have the type `void` (technically `undefined` can also be used, but `void` is the preferred)
 - in JS function are but regular values, hence when you pass a function to be called as a parameter to another function, set its type to be the return type of the passed function
-- 
+- Function types can be provided as a function signature which can then be factored out by being given a type alias
+
+### Interface and Type Alias
+
+- Type aliases are more useful in providing a signature of a function, for example
+- While defining the skeleton on an object, its better to use an Interface - this is specifically for creating objects
+- `type` keyword is a more general keyword, it can be applied to multiple types of variables
+- `interface` keyword is more limited, while it can be applied to objects and even function types, it cannot for example be used to store union types
+- there are, however, special cases where `interface` keyword can be quite useful, like while implementing classes
+- `interface` keywords allows for easier extensions of itself
+  - a given interface can be modified (can have more properties added it to), if and when necessary, because interfaces can be redeclared
