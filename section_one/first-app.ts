@@ -175,7 +175,7 @@ const textStorage: DataStorage<string> = {
   },
 };
 
-const userStorage: DataStorage<User> = {
+const userStorage: DataStorage<AppUser> = {
   storage: [],
   add: (user) => {
     this.storage.push(user);
