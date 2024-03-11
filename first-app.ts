@@ -107,3 +107,94 @@ login(new AuthCredentials());
 interface Credentials {
   mode: string;
 }
+
+// Merging types declared with type keyword
+type Admin = {
+  permissions: string[];
+};
+
+type AppUser = {
+  userName: string;
+};
+
+type AppAdmin = Admin & AppUser;
+
+let newAdmin: AppAdmin = {
+  permissions: ["login"],
+  userName: "Max",
+};
+
+// Merging types declared with Interface
+interface inAdmin {
+  permissions: string[] | [];
+}
+
+interface inAppUser {
+  userName: string;
+}
+
+// One tends to extend interfaces even while merging props
+interface inAppAdmin extends inAdmin, inAppUser {
+  // add properties that you want to extend the interface(s) with here
+}
+
+let inNewAdmin: inAppAdmin = {
+  permissions: [],
+  userName: "Nana",
+};
+
+// Example of type guarding and type narrowing
+type Role = "admin" | "user" | "editor";
+
+function performAction(action: string, role: Role) {
+  if (role === "admin") {
+    // do stuff specific to the admin role!
+  }
+
+  if (typeof action === "string") {
+    // This works perfectly during run time because typeof is native to JS and not to TS
+  }
+}
+
+// Working with Generic types
+let roles = Array<Role>; // this is an example of a built-in generic type. The alternate form of Role[] is not.
+
+// Building your own generic type
+type DataStorage<T> = {
+  // when I do not know the shape of the objects that the storage array carries, the type information carried by DataStorage itself becomes less specific
+  //  and thus, dependent on the placeholder(<T> is the standard, can be anything) type of the storage property. Making DataStorage a Generic Type
+  storage: Array<T>;
+  add: (data: T) => void;
+};
+
+// The above type allows us to store data of different types! Its generic!
+const textStorage: DataStorage<string> = {
+  storage: [],
+  add: (data) => {
+    this.storage.push(data);
+  },
+};
+
+const userStorage: DataStorage<User> = {
+  storage: [],
+  add: (user) => {
+    this.storage.push(user);
+  },
+};
+
+// creating a generic function
+function merge<T, U>(a: T, b: U) {
+  return { ...a, ...b };
+}
+
+// The following won't work!
+// let mergeAgain = (a: T, b: U): <T, U> => { ...a, ...b }
+
+const newUser = merge<{ name: string }, { age: number }>(
+  { name: "Max" },
+  { age: 34 }
+);
+
+// While coding in real life, the following signature is often encountered where the expected types are infered from the values that are passed in during function call!
+// let newUser = merge({ name: 'Max' }, { age: 34 });
+// Here T and U are infered to be of type { name: string } and { age: number }

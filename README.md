@@ -38,3 +38,32 @@ This repository contains code for the course by the same name by Maximilian Schw
 - there are, however, special cases where `interface` keyword can be quite useful, like while implementing classes
 - `interface` keywords allows for easier extensions of itself
   - a given interface can be modified (can have more properties added it to), if and when necessary, because interfaces can be redeclared
+
+### Merging Types
+
+- Union types represent A | B (or => one of the two options)
+- Merged type is A & B (and => all props in both options)
+
+### Literal Types
+
+- Setting a specific value, makes it a literal type
+
+### Type Guards
+
+- When there is conditional handling based on an option from a Union type, we use if-else blocks to handle for different option states
+- When `if-else` blocks are used in conjunction with `typeof` keywords in the conditions, we create Type Guards
+- Type Guarding allows for TypeScript to do Type Narrowing (go from a broader type to a specific subset)
+- Type Guarding and Narrowing allows us to work with properties specific to that particular type alone
+- This is important because in a Union, only those properties common to all the types specified in the Union, are made available without this pattern
+- Type Narrowing and guarding can only be done on JS native types, instances and properties!
+  - Since, TS is compiled to JS at run time, the custom type (say, a type alias) disappears
+  - So, no type checking can be done for a type that no longer exists during run time!
+  - In order to make sure the code runs at runtime, use JS native features like `typeof` (for the 9 JS value types), `instanceOf` (to check if an object value is an instance of specific class) or `in` (to check if an object has a particular property)
+- Type Guarding with Union Types is a common design pattern
+
+### Generic Type
+
+- Are types that work together with another type. Ex `Array<string>` means the `Array` type works with the `string` type
+- There are certain types that need another type to work with (like Arrays), making them generic types
+- Generic types are built when the type information is incomplete and dependent on the type to be infered for one or more of its properties
+
