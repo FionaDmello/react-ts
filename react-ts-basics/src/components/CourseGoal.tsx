@@ -1,5 +1,5 @@
 // ReactNode is a type, so it should be decorated to make it clear to the build tool that its an import that can be removed from the code that runs in the browser because the browser won't be able to deal with types anyways
-//import { type PropsWithChildren } from "react";
+//import { tpye FC, type PropsWithChildren } from "react";
 import { type ReactNode } from "react";
 
 // good idea to have a type alias (type or interface) on top to make the prop more easier to read and navigate
@@ -30,5 +30,16 @@ const CourseGoal = ({ title, children }: CourseGoalProps) => {
     </article>
   );
 };
+
+// another valid rfc signature with arrow functions is shown below
+{
+  /*
+  const CourseGoal: FC<CourseGoalProps> = ({ title, children }) => {
+  return (  );
+}
+ 
+export default CourseGoal;
+*/
+}
 
 export default CourseGoal;
