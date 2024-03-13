@@ -15,6 +15,7 @@ type CourseGoalProps = {
 // an alternate to the code above is to use another special type as shown below
 // since it only provides a short cut to the children props declaration, its a generic type
 // this needs to work with the type of the other props you expect
+
 // TODO: uncomment the code below and hover over CourseGoalPropsAlt to see how the type is actually created!
 //type CourseGoalPropsAlt = PropsWithChildren<{ title: string }>;
 
@@ -41,5 +42,7 @@ const CourseGoal = ({ title, children }: CourseGoalProps) => {
 export default CourseGoal;
 */
 }
+
+//NOTE: the key prop is also made available to all React components, but this does not need to be explicitly set in order to be used, unlike the children prop
 
 export default CourseGoal;
