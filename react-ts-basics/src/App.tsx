@@ -1,9 +1,9 @@
 import Header from "./components/Header";
-import CourseGoal from "./components/CourseGoal";
+import CourseGoalList from "./components/CourseGoalList";
 import goalsImg from "./assets/goals.jpg";
 import { useState } from "react";
 
-type CourseGoals = {
+export type CourseGoal = {
   id: number;
   title: string;
   description: string;
@@ -15,12 +15,12 @@ export default function App() {
   // this is something that TS will likely not be able to infer from the initial value, appropriately
   // hence, one needs to set the type as shown below (because useState is a generic function, it takes a type prop)
   // this will also allow the appropriate type to be set on the variable going forward, else TS will keep throwing problems
-  const [goals, setGoals] = useState<CourseGoals[]>([]);
+  const [goals, setGoals] = useState<CourseGoal[]>([]);
 
   const addGoalHandler = () => {
     //when the new state depends on the old state use the following pattern to update state
     setGoals((prevGoals) => {
-      const newGoal: CourseGoals = {
+      const newGoal: CourseGoal = {
         id: Math.random(),
         title: "Learn React + TS",
         description: "Learn it in depth!",
@@ -37,17 +37,7 @@ export default function App() {
       <div>
         <button onClick={addGoalHandler}>Add Goal</button>
       </div>
-      <>
-        <ul>
-          {goals.map((goal) => {
-            return (
-              <li key={goal.id}>
-                <CourseGoal title={goal.title}>{goal.description}</CourseGoal>
-              </li>
-            );
-          })}
-        </ul>
-      </>
+      <CourseGoalList goals={goals} />
     </main>
   );
 }
