@@ -6,6 +6,7 @@ import { type ReactNode } from "react";
 type CourseGoalProps = {
   title: string;
   children: ReactNode;
+  deleteGoalHandler: () => void;
 };
 // NOTE: every react prop object has a special "children" property - when we need to  wrap our component around other some jsx code & use that wrapped code inside of the component
 // every react component, in theory, receives the children prop. But on using custom type definitions we can make it inaccessible
@@ -20,14 +21,18 @@ type CourseGoalProps = {
 //type CourseGoalPropsAlt = PropsWithChildren<{ title: string }>;
 
 //NOTE: the signature is -  actual variable: variable type!
-const CourseGoal = ({ title, children }: CourseGoalProps) => {
+const CourseGoal = ({
+  title,
+  children,
+  deleteGoalHandler,
+}: CourseGoalProps) => {
   return (
     <article>
       <div>
         <h2>{title}</h2>
         <p>{children}</p>
       </div>
-      <button>Delete</button>
+      <button onClick={deleteGoalHandler}>Delete</button>
     </article>
   );
 };
