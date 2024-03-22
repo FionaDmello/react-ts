@@ -1,5 +1,6 @@
 import Header from "./components/Header";
 import CourseGoalList from "./components/CourseGoalList";
+import AddCourseGoal from "./components/AddCourseGoal";
 import goalsImg from "./assets/goals.jpg";
 import { useState } from "react";
 
@@ -29,7 +30,7 @@ export default function App() {
     });
   };
 
-  const deleteGoalHandler: (id: number) => void = (id) =>  {
+  const deleteGoalHandler: (id: number) => void = (id) => {
     setGoals((prevGoals) => {
       const newGoals = prevGoals.filter((goal) => goal.id !== id);
       return newGoals;
@@ -41,9 +42,7 @@ export default function App() {
       <Header image={{ src: goalsImg, alt: "A list of goals" }}>
         <h1>Your Course Goals</h1>
       </Header>
-      <div>
-        <button onClick={addGoalHandler}>Add Goal</button>
-      </div>
+      <AddCourseGoal onAddGoal={addGoalHandler} />
       <CourseGoalList goals={goals} deleteGoalHandler={deleteGoalHandler} />
     </main>
   );
