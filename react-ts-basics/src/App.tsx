@@ -2,7 +2,7 @@ import Header from "./components/Header";
 import CourseGoalList from "./components/CourseGoalList";
 import AddCourseGoal from "./components/AddCourseGoal";
 import goalsImg from "./assets/goals.jpg";
-import { useState } from "react";
+import { type FormEvent, useState } from "react";
 
 export type CourseGoal = {
   id: number;
@@ -18,8 +18,17 @@ export default function App() {
   // this will also allow the appropriate type to be set on the variable going forward, else TS will keep throwing problems
   const [goals, setGoals] = useState<CourseGoal[]>([]);
 
-  const addGoalHandler = () => {
-    //when the new state depends on the old state use the following pattern to update state
+  const addGoalHandler = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    // this is a DOM method, receives the DOM element (in our case, the form element),
+    // and gives us easy access to the form data through it
+    // we need to use event.currentTarget to make sure we pass the appropriate form to the object
+    // the type of the event object has to be updated (extended) to mention the type of the element we are expecting
+    // the HTMLFormElement type is made available via the lib property in tsconfig!
+    new FormData(event.currentTarget);
+
+    /*
     setGoals((prevGoals) => {
       const newGoal: CourseGoal = {
         id: Math.random(),
@@ -28,6 +37,7 @@ export default function App() {
       };
       return [...prevGoals, newGoal];
     });
+    */
   };
 
   const deleteGoalHandler: (id: number) => void = (id) => {
