@@ -4,9 +4,10 @@ import { type ReactNode } from "react";
 
 // good idea to have a type alias (type or interface) on top to make the prop more easier to read and navigate
 type CourseGoalProps = {
+  id: number;
   title: string;
   children: ReactNode;
-  deleteGoalHandler: () => void;
+  deleteGoalHandler: (id: number) => void;
 };
 // NOTE: every react prop object has a special "children" property - when we need to  wrap our component around other some jsx code & use that wrapped code inside of the component
 // every react component, in theory, receives the children prop. But on using custom type definitions we can make it inaccessible
@@ -22,6 +23,7 @@ type CourseGoalProps = {
 
 //NOTE: the signature is -  actual variable: variable type!
 const CourseGoal = ({
+  id,
   title,
   children,
   deleteGoalHandler,
@@ -32,7 +34,7 @@ const CourseGoal = ({
         <h2>{title}</h2>
         <p>{children}</p>
       </div>
-      <button onClick={deleteGoalHandler}>Delete</button>
+      <button onClick={() => deleteGoalHandler(id)}>Delete</button>
     </article>
   );
 };

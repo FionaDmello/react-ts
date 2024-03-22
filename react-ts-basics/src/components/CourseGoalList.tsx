@@ -18,8 +18,9 @@ const CourseGoalList: FC<CourseGoalListProps> = ({
           return (
             <li key={goal.id}>
               <CourseGoal
+                id={goal.id}
                 title={goal.title}
-                deleteGoalHandler={() => deleteGoalHandler(goal.id)}
+                deleteGoalHandler={deleteGoalHandler}
               >
                 {goal.description}
               </CourseGoal>
